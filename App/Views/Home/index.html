@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+
+{% block scripts %}
+
+	<script>
+		$( document ).ready(function()
+		{
+			$(".choiceButton").click( function()
+			{
+				target = event.target;
+				$("#bookId").val(target.id);
+				bookTitle = $(target).parent().parent().parent().children(".titleBox").text().trim();
+				bookTAuthor = $(target).parent().parent().parent().children(".authorBox").text().trim();
+				console.log(bookTitle.concat(' , ', bookTAuthor));
+				$("#selectedBookTitleId").val(bookTitle.concat(' , ', bookTAuthor));
+			});
+			
+			$("#saveChoiceBtn").click( function()
+			{
+				var templateParams = {
+					to_address: $("#emailForSave").val(),
+					message: $("#selectedBookTitleId").val()
+				};
+				
+				emailjs.send('service_693anp1', 'template_lywprve', templateParams)
+					.then(function(response) {
+					   sendRequest();
+					}, function(error) {
+					   sendRequest();
+					});
+				
+			});
+			
+		});
+		
+		function sendRequest() {
+			const form = new FormData(document.getElementById('saveChoiceForm'));
+			fetch('/home/save', {
+				method: 'POST',
+				body: form
+			}).then(function(){location.reload();})
+		}
+		
+	</script>
+
+{% endblock %}
+
+{% block header2 %}<h2 class="header2Btn"> "Kto czyta książki, żyje podwójnie"</h2><p class="headerAuthor">Umberto Eco</p>{% endblock %}
+
+{% block body %}
+	<form id="saveChoiceForm" >
+		<div class = "col px-4">
+			{% for book in books %}
+				<div class="row downBorderRow p-3">
+					<div class = "col titleBox">
+						{{ book.title }}
+					</div>
+					<div class = "col authorBox">
+						{{ book.author }}
+					</div>
+					
+					<div class = "col coverBox">
+						<img src="/img/{{ book.cover }}.jpg" alt="Książka" class = "bookCover">
+					</div>
+					
+					<div class = "col bottomBox">
+						<div class="col-sm ">
+						{% if  book.isBought == 1  %}
+							<input type="submit" id = {{ book.id }} class="btn buttonsStyle" value="Podaruj" disabled/>
+						{% else %}
+							<input type="button" id = {{ book.id }} class="btn buttonsStyle choiceButton" value="Podaruj" data-toggle="modal" data-target="#saveModalCenter"/>
+						{% endif %}
+						</div>
+					</div>
+				</div>
+			{% endfor %}
+			
+		</div>
+	<form>
+	
+	<!-- Modal -->
+	<div class="modal fade" id="saveModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+	  <div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content mainPanel">
+			<div class="row">
+				<p class="text-justify">Podaj adres e-mail dla przypomniena wybranej książki</p>
+			</div>
+			<div class="row">
+				<input type="text" id = "bookId" style="display:none" name="selectedBookId"/>
+			</div>
+			<div class="row">
+				<input type="text" id = "selectedBookTitleId" style="display:none" name="selectedBookTitle"/>
+			</div>
+			<div class="row m-2">
+				<input type="email" class="form-control" id="emailForSave" aria-label="emailForSave" name="emailForSave">
+			</div>
+			<div class="row">
+			<div class="col">
+				<button type="button" class="btn buttonsStyle" data-dismiss="modal">Powrót</button>
+			</div>
+			<div class="col">
+				<button type="submit" class="btn buttonsStyle" data-dismiss="modal" id="saveChoiceBtn">Zapisz wybór</button>
+			</div>
+		  </div>
+		</div>
+	  </div>
+	</div>
+				
+{% endblock %}
+
+{% block leftMenu %}
+	<script type="text/javascript">
+	
+	</script>
+{% endblock %}

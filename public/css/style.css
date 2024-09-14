@@ -1,0 +1,139 @@
+body
+{
+	background-color: #f7f5f0;
+	color: white;
+	font-size: 30px;
+	text-align: center;
+	font-family: 'Roboto Slab', serif;
+}
+
+h1
+{
+	font-size: 60px;
+	margin: 5px;
+}
+
+h2
+{
+	font-size: 30px;
+	font-weight: 200;
+	font-style: italic;
+	margin: 5px;
+}
+
+.mainPanel
+{
+	background-color:#f7f5f0;
+	margin-left: auto;
+	margin-right: auto;
+	border-radius: 20px;
+	border: 3px solid #73656a;
+	box-shadow: 5px 5px 10px #225;
+	color: #73656a;
+	font-size: 18px;
+	font-family: 'Roboto Slab', serif;
+	padding: 20px;
+}
+
+.test1
+{
+	background-color:#eee;
+	min-height: 100px;
+}
+
+.bg-container
+{
+	background-color: #f7f5f0;
+}
+
+.buttonsStyle
+{
+	background-color:#73656a;
+	box-shadow: 3px 3px 5px #225;
+	border: none;
+	color: white;
+}
+
+.buttonsStyle:hover
+{
+	background-color: #77686e;
+}
+
+.headerBtn
+{
+	text-decoration: none;
+	cursor: pointer;
+	color: #73656a;
+}
+
+.headerBtn:hover
+{
+	color: #73656a;
+}
+
+.header2Btn
+{
+	text-decoration: none;
+	color: #63454a;
+}
+
+.headerAuthor {
+	color: #63454c;
+	font-size: 14px;
+	font-style: italic;
+}
+
+.bookCover
+{
+	max-width: 100px;
+	max-height: 170px;
+}
+
+.downBorderRow
+{
+	border-bottom: 1px solid #73656a;
+
+}
+
+.titleBox
+{
+	margin: auto;
+	font-style: italic;
+}
+
+.authorBox
+{
+	margin: auto;
+}
+
+.coverBox
+{
+	margin: auto;
+}
+
+.bottomBox
+{
+	margin-top: auto;
+	margin-bottom: auto;
+}
+
+.choiceButton 
+{
+	
+}
+
+@media(max-width: 575px)
+{
+	.buttonsStyle
+	{
+		margin-top: 5px;
+		margin-bottom: 5px;
+		font-size: 12px;
+	}
+	
+	.menuPanel
+	{
+		padding: 20px;
+	}
+}
+
